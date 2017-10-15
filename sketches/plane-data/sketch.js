@@ -21,7 +21,8 @@ function preload(){
 
 
 function setup() {
-  createCanvas(800, 400);
+  canvas = createCanvas(800, 400);
+  canvas.parent('sketch-holder');
   dataObj = {min:Infinity, max:-Infinity};
   data.forEach((obj)=>{
     if(obj.passengers < dataObj.min){
@@ -45,6 +46,7 @@ function draw() {
   sky.render();
   plane.hover();
   plane.render();
+  yearObj.modifyColorOnPlaneClimb(plane.isClimbing);
   yearObj.render();
 }
 
@@ -54,20 +56,33 @@ class YearObj {
     this.y = y;
     this.r = r;
     this.year = year;
+    this.color = color(0, 102, 153);
+    this.highlight = color(255, 51, 0);
+    this.currentColor = this.color;
   }
   
   setYear(year){
     this.year = year;
   }
   
+  modifyColorOnPlaneClimb(planeIsClimbing){
+    if(planeIsClimbing){
+      this.currentColor = this.highlight;
+    }else{
+      this.currentColor = this.color;
+    }
+  }
+  
   render(){
     push();
-    ellipseMode(CENTER);
-    ellipse(this.x, this.y,  this.r, this.r);
-    textSize(20);
-    fill(255);
-    text(this.year, this.x-22, this.y+7);
-    fill(0, 102, 153);
+      ellipseMode(CENTER);
+      fill(this.currentColor);
+      ellipse(this.x, this.y,  this.r, this.r);
+      push();
+        textSize(20);
+        fill(255);
+        text(this.year, this.x-22, this.y+7);
+      pop();
     pop();
   }
 }
@@ -193,7 +208,7 @@ function mousePressed() {
     let obj = data.shift();
     countOfDataShifts++;
     console.log(obj.min);
-    let xPixelClimb = map(countOfDataShifts, 1, 4, 0, width/2);
+    let xPixelClimb = map(countOfDataShifts, 0, 4, 0, width/2);
     let yPixelClimb = map(obj.passengers, dataObj.min, dataObj.max, height-20, 20);      
     plane.updateNumericVal(obj.passengers);
     plane.climb(xPixelClimb, yPixelClimb);
