@@ -77,4 +77,4 @@ setInterval(()=>{
   document.getElementById("year").innerText = year;
 
   update(houseData, year);
-}, 500);
+}, 1000);
