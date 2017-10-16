@@ -32,7 +32,7 @@ function draw() {
   createClockArc(minutesAngle, 180, 60, "LawnGreen");
   strokeWeight(2);
   secondsColor = map(theSeconds, 0, 60, 100, 255)
-  createClockArc(secondsAngle, 160, 80, color(secondsColor));
+  createClockArc(secondsAngle, 160, 80, color(secondsColor, 10, 230));
   strokeWeight(12);
   stroke(240);
   point(0, 0);
