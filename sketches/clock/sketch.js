@@ -21,6 +21,7 @@ function draw() {
   let theMinutes = minute();
   let minutesAngle = map(theMinutes, 0, 60, 0, 360);
   let theHours = hour();
+  console.log(theHours)
   let hoursAngle = map(theHours % 12, 0, 12, 0, 360);
   
   translate(200, 200);
