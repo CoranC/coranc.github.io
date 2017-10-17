@@ -4,6 +4,10 @@
   <meta name="viewport" content="width=device-width">
   <title>Irish House Price Visualization</title>
 <style>
+  .container {
+    margin: auto;
+    width: 100%;
+  }
   span {
     font-family: arial;
     color: slategrey;
@@ -26,11 +30,13 @@
   
 <body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-  <span>Second Hand House Prices per County <span id="year">1995</span></span></span>
-  <script src="viz.js"></script>
-  <ul style="font-family: arial; color: black;">
-    <li>Average House prices per county from 1995 to 2016.</li>
-    <li>The size of each county bubble represents its respective population as of 2016.</li>
-  </ul>
+  <div class="container">
+    <span>Second Hand House Prices per County <span id="year">1995</span></span></span>
+    <script src="viz.js"></script>
+    <ul style="font-family: arial; color: black;">
+      <li>Average House prices per county from 1995 to 2016.</li>
+      <li>The size of each county bubble represents its respective population as of 2016.</li>
+    </ul>
+  </div>
 </body>
 </html>
