@@ -8,12 +8,12 @@ let scaleY;
 let scalePopulation;
 let houseData;
 
-let svg = d3.select("body").append("svg")
-  .attr("width", width)
-  .attr("height", height);
+let svg = d3.select('body').append('svg')
+  .attr('width', width)
+  .attr('height', height);
 
 
-d3.json("/housePrices.json", (err,data) =>{
+d3.json('/housePrices.json', (err,data) =>{
   if(err) console.log(`error fetching data:${err}`);
   houseData = data;
   console.log(data);
@@ -28,14 +28,14 @@ d3.json("/housePrices.json", (err,data) =>{
     .range([10, 50]);
 
   let yAxisL = d3.svg.axis().scale(scaleY)
-    .orient("left");
+    .orient('left');
   let yAxisR = d3.svg.axis().scale(scaleY)
-    .orient("right");
-  let yAxisGroupL = svg.append("g")
+    .orient('right');
+  let yAxisGroupL = svg.append('g')
     .attr('class', 'axis')
     .attr('transform', `translate(${buffer/2},0)`)
     .call(yAxisL);
-  let yAxisGroupR = svg.append("g")
+  let yAxisGroupR = svg.append('g')
     .attr('class', 'axis')
     .attr('transform', `translate(${width - buffer/2}, 0)`)
     .call(yAxisR);
@@ -45,8 +45,8 @@ d3.json("/housePrices.json", (err,data) =>{
     .rangePoints([buffer, width-buffer]);
   let xAxis = d3.svg.axis()
     .scale(x)
-    .orient("bottom");
-  let xAxisGroup = svg.append("g")
+    .orient('bottom');
+  let xAxisGroup = svg.append('g')
     .attr('class', 'axis')
     .attr('transform', 'translate(0, 480)')
     .call(xAxis);
@@ -57,40 +57,40 @@ d3.json("/housePrices.json", (err,data) =>{
 
 function update(data, year){
   
-  var circle = svg.selectAll("circle")
+  var circle = svg.selectAll('circle')
     .data(data);
   
   circle.exit().remove();
   
-    circle
+  circle
     .transition()
-      .ease("easeElastic") 
+      .ease('easeElastic') 
       .duration(1000)
-      .attr("cx", (d)=>{
+      .attr('cx', (d)=>{
         return scaleX(+d.ID)
       })
-      .attr("cy", (d)=>{
-        return scaleY(+d["price_" + year])
+      .attr('cy', (d)=>{
+        return scaleY(+d['price_' + year])
       })
-      .attr("r", (d)=>{
-        return scalePopulation(+d["pop_" + year]);
+      .attr('r', (d)=>{
+        return scalePopulation(+d['pop_' + year]);
       })
-      .attr("fill", (d)=>{
+      .attr('fill', (d)=>{
         return d.Color;
       }) 
     
   circle.enter()
-    .append("circle")
-      .attr("cx", (d)=>{
+    .append('circle')
+      .attr('cx', (d)=>{
         return scaleX(+d.ID)
       })
-      .attr("cy", (d)=>{
-        return scaleY(+d["price_" + year])
+      .attr('cy', (d)=>{
+        return scaleY(+d['price_' + year])
       })
-      .attr("r", (d)=>{
-        return scalePopulation(+d["pop_" + year]);
+      .attr('r', (d)=>{
+        return scalePopulation(+d['pop_' + year]);
       })
-      .attr("fill", (d)=>{
+      .attr('fill', (d)=>{
         return d.Color;
       });
 }
@@ -101,7 +101,7 @@ setInterval(()=>{
   if(year > 2016){
     year = 1995;
   };
-  document.getElementById("year").innerText = year;
+  document.getElementById('year').innerText = year;
 
   update(houseData, year);
 }, 500);
