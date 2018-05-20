@@ -13,7 +13,7 @@ let svg = d3.select('body').append('svg')
   .attr('height', height);
 
 
-d3.json('/housePrices.json', (err,data) =>{
+d3.json('./housePrices.json', (err,data) =>{
   if(err) console.log(`error fetching data:${err}`);
   houseData = data;
   console.log(data);
